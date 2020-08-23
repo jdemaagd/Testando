@@ -35,7 +35,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            InventoryManager.items.remove(at: indexPath.row)
+            // InventoryManager.items.remove(at: indexPath.row)
+            InventoryManager.delete(index: indexPath.row)
             tableViewMain.reloadData()
         }
     }

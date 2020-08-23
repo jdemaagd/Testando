@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddViewController: UIViewController {
+class AddViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet var model: UITextField!
     @IBOutlet var units: UITextField!
@@ -25,10 +25,22 @@ class AddViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+       textField.resignFirstResponder()
+        
+       return true
+    }
+    
 
     @IBAction func addButton_click(_ sender: AnyObject) {
-        let i = InventoryItem(name: model.text!, units: Int(units.text!)!, manufacturerName: make.text!, dateAdded: String(describing: Date()))
-        InventoryManager.add(item: i)
+        let modelText = model.text!
+        let unitsText = Int(units.text!)!
+        let makeText = make.text!
+        let dateText = String(describing: Date())
+        
+        let item = InventoryItem(name: modelText, units: unitsText, manufacturerName: makeText, dateAdded: dateText)
+        
+        InventoryManager.add(item: item)
     }
     
     
