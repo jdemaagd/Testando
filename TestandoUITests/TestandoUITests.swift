@@ -10,128 +10,64 @@ import XCTest
 
 class TestandoUITests: XCTestCase {
 
+    var topLevelApp: XCUIApplication? = nil
+    
     override func setUp() {
         super.setUp()
-        
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-        
-        // In UI tests it is usually best to stop immediately when a failure occurs.
-        continueAfterFailure = false
-        // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
-        XCUIApplication().launch()
 
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+        continueAfterFailure = false
+
+        XCUIApplication().launch()
+        topLevelApp = XCUIApplication()
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
+        
+        topLevelApp = nil
     }
     
-    func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testAddOneItem() {
+        //addOne()
+        //XCTAssertEqual(topLevelApp?.tables["mainTable"].cells.count, 5)
     }
     
-    func testClickToDetailView(){
-        
-        let app = XCUIApplication()
-        app.tables.staticTexts["Highlander"].tap()
-        app.navigationBars["inventoryapp.DetailView"].children(matching: .button).matching(identifier: "Back").element(boundBy: 0).tap()
-        
+    func testClickToDetailView() {
+        topLevelApp?.tables/*@START_MENU_TOKEN@*/.staticTexts["Highlander"]/*[[".cells.staticTexts[\"Highlander\"]",".staticTexts[\"Highlander\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        topLevelApp?.navigationBars["Testando.DetailView"].buttons["Back"].tap()
     }
     
-    func testClickToViewAndBack(){
-        
-        let app = XCUIApplication()
-        let table = app.tables["mainTable"]
-        table.cells.staticTexts["Toyota"].tap()
-        app.navigationBars["inventoryapp.DetailView"].children(matching: .button).matching(identifier: "Back").element(boundBy: 0).tap()
-        
+    func testClickToViewAndBack() {
+        let table = topLevelApp?.tables["mainTable"]
+        table?.cells/*@START_MENU_TOKEN@*/.staticTexts["Altima"]/*[[".cells.staticTexts[\"Altima\"]",".staticTexts[\"Altima\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        topLevelApp?.navigationBars["Testando.DetailView"].buttons["Back"].tap()
     }
     
-    func testAddOne() {
-        XCUIApplication().navigationBars["inventoryapp.View"].buttons["Add"].tap()
+    func testDeleteOne() {
+        let mainTable = topLevelApp?.tables["mainTable"]
+        mainTable?.staticTexts["Highlander"].swipeLeft()
+        mainTable?.buttons["Delete"].tap()
         
-        let app = XCUIApplication()
-        let modelTextField = app.textFields["model"]
-        modelTextField.tap()
-        modelTextField.typeText("Tundra")
-        
-        let unitsTextField = app.textFields["units"]
-        unitsTextField.tap()
-        unitsTextField.typeText("10")
-        
-        let makeTextField = app.textFields["make"]
-        makeTextField.tap()
-        makeTextField.typeText("Toyota")
-        
-        app.buttons["Add"].tap()
-        app.navigationBars["inventoryapp.AddView"].children(matching: .button).matching(identifier: "Back").element(boundBy: 0).tap()
-        
-        let table = app.tables["mainTable"]
-        XCTAssertEqual(table.cells.count, 5)
+        XCTAssertEqual(mainTable?.cells.count, 3)
     }
     
-    func testAddOneDeleteSame() {
+    func addOne() {
+        XCUIApplication().navigationBars["Testando.View"].buttons["Add"].tap()
         
-        XCUIApplication().navigationBars["inventoryapp.View"].buttons["Add"].tap()
-        let app = XCUIApplication()
-
-        let modelTextField = app.textFields["model"]
-        modelTextField.tap()
-        modelTextField.typeText("Tundra")
+        let modelTextField = topLevelApp?.textFields["model"]
+        modelTextField?.tap()
+        modelTextField?.typeText("Tundra")
         
-        let unitsTextField = app.textFields["units"]
-        unitsTextField.tap()
-        unitsTextField.typeText("10")
+        let unitsTextField = topLevelApp?.textFields["units"]
+        unitsTextField?.tap()
+        unitsTextField?.typeText("10")
         
-        let makeTextField = app.textFields["make"]
-        makeTextField.tap()
-        makeTextField.typeText("Toyota")
+        let makeTextField = topLevelApp?.textFields["make"]
+        makeTextField?.tap()
+        makeTextField?.typeText("Toyota")
         
-        app.buttons["Add"].tap()
-        app.navigationBars["inventoryapp.AddView"].children(matching: .button).matching(identifier: "Back").element(boundBy: 0).tap()
-        
-        let maintableTable = app.tables["mainTable"]
-        maintableTable.staticTexts["Tundra"].swipeLeft()
-        maintableTable.buttons["Delete"].tap()
-        
-        XCTAssertEqual(maintableTable.cells.count, 4)
-        
+        topLevelApp?.buttons["Add"].tap()
+        //topLevelApp?.navigationBars["Testando.AddView"].buttons["Back"].tap()
+        topLevelApp?.navigationBars["Testando.AddView"].children(matching: .button).matching(identifier: "Back").element(boundBy: 0).tap()
     }
-    
-    
-    
-    
-//    override func setUpWithError() throws {
-//        // Put setup code here. This method is called before the invocation of each test method in the class.
-//
-//        // In UI tests it is usually best to stop immediately when a failure occurs.
-//        continueAfterFailure = false
-//
-//        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
-//    }
-//
-//    override func tearDownWithError() throws {
-//        // Put teardown code here. This method is called after the invocation of each test method in the class.
-//    }
-//
-//    func testExample() throws {
-//        // UI tests must launch the application that they test.
-//        let app = XCUIApplication()
-//        app.launch()
-//
-//        // Use recording to get started writing UI tests.
-//        // Use XCTAssert and related functions to verify your tests produce the correct results.
-//    }
-//
-//    func testLaunchPerformance() throws {
-//        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {
-//            // This measures how long it takes to launch your application.
-//            measure(metrics: [XCTOSSignpostMetric.applicationLaunch]) {
-//                XCUIApplication().launch()
-//            }
-//        }
-//    }
 }

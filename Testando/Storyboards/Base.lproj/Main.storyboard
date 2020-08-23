@@ -26,7 +26,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Testando" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InitialViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="Testando" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -82,6 +82,9 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="mainTable"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="xm4-ic-GTG"/>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="sJi-k1-SNk"/>
@@ -98,12 +101,15 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="oIH-p5-FK9">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="plus" catalog="system" id="XBO-Wn-rUC"/>
+                        <barButtonItem key="rightBarButtonItem" title="Add" image="plus" catalog="system" id="XBO-Wn-rUC">
+                            <connections>
+                                <segue destination="4k6-p4-brw" kind="show" identifier="addView" id="bX3-qz-Lcl"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableViewMain" destination="fNU-B0-YGR" id="JtH-x3-gsr"/>
                         <segue destination="bwE-uL-nYo" kind="show" identifier="detailView" id="fkh-5U-9fz"/>
-                        <segue destination="4k6-p4-brw" kind="show" identifier="addView" id="L30-Ha-S39"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -124,13 +130,19 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="4k6-p4-brw" id="Es8-tQ-dY8"/>
+                                </connections>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="units" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gx3-QY-JR9" userLabel="Units">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="10" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gx3-QY-JR9" userLabel="Units">
                                 <rect key="frame" x="16" y="187" width="382" height="34"/>
                                 <color key="backgroundColor" red="0.0039215686269999999" green="0.039215686270000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="4k6-p4-brw" id="CpI-Oj-nzo"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="make" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="heT-3U-rgv" userLabel="Make">
                                 <rect key="frame" x="16" y="256" width="382" height="34"/>
@@ -138,6 +150,9 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="4k6-p4-brw" id="rY8-v4-dT2"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s1D-G5-dNY" userLabel="Add">
                                 <rect key="frame" x="147" y="787" width="120" height="30"/>
@@ -145,7 +160,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="oMu-aB-lzq"/>
                                 </constraints>
-                                <state key="normal" title="Button">
+                                <state key="normal" title="Add">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>

@@ -20,7 +20,11 @@ class InventoryManager: NSObject {
         InventoryManager.items.append(InventoryItem(name: "Impreza", units: 10, manufacturerName: "Subaru", dateAdded:"12/5/2016"))
     }
     
-    static func add(item:InventoryItem) {
+    static func add(item: InventoryItem) {
         InventoryManager.items.append(item)
+    }
+
+    static func delete(index:Int) {
+        InventoryManager.items.remove(at: index)
     }
 }
